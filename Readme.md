@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Alexey Krivoy](https://up.htmlacademy.ru/javascript/31/user/2298933).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Изосимов](https://up.htmlacademy.ru/javascript/31/user/2298933).
 
 ---
 
