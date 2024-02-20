@@ -4,9 +4,7 @@ const checkString = (string, length) => {
   return result;
 };
 
-console.log("1 " + checkString('stroke', 10)); // true
-console.log("2 " + checkString('stroke', 6)); // true
-console.log("3 " + checkString('stroke', 4)); // false
+checkString();
 
 //------------------------------------------------------
 //Функция для проверки, является ли строка палиндромом
@@ -20,26 +18,23 @@ const checkPalidrome = (string) => {
   return result === newString;
 };
 
-console.log("1 " + checkPalidrome('топот'));
-console.log("2 " + checkPalidrome('Лёша на полке клопа нашёл '));
-console.log("3 " + checkPalidrome('Кекс'));
+checkPalidrome();
 
 //---------------------------------------------------------------------------------
 //Функция ввывода чисел из строки
 
 const getNumber = (string) => {
   string = string.toString();
-  let numberString;
+  let numberString = '';
   let result = '';
   for (let i = 0; string.length - 1 >= i; i++) {
-    numberString = parseInt(string[i]);
+    numberString = parseInt(string[i], 10);
     if (!Number.isNaN(numberString)) {
       result += numberString;
     }
   }
-  return result;
+
+  return result === '' ? NaN : result;
 };
 
-console.log("1 " + getNumber('2023 год 22'));
-console.log("2 " + getNumber('ECMAScript 2022 22'));
-console.log("3 " + getNumber(-1.2));
+getNumber();
