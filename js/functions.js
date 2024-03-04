@@ -26,7 +26,7 @@ checkPalidrome();
 const getNumber = (string) => {
   string = string.toString();
   let numberString = '';
-  let result = '';
+  let result = ' ';
   for (let i = 0; string.length - 1 >= i; i++) {
     numberString = parseInt(string[i], 10);
     if (!Number.isNaN(numberString)) {
@@ -34,7 +34,7 @@ const getNumber = (string) => {
     }
   }
 
-  return result === '' ? NaN : result;
+  return Number(result);
 };
 
 getNumber();
