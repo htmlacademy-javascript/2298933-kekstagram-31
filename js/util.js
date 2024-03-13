@@ -14,7 +14,7 @@ const getRandomArrayElement = (elements) => elements[createRandomNumber(0, eleme
 export {getRandomArrayElement};
 
 // Создание уникального ID
-const createRandomId = (min, max) => {
+const createRandomNoRepeatInteger = (min, max) => {
   const idValue = [];
   return function () {
     let currentValue = createRandomNumber (min, max);
@@ -29,4 +29,4 @@ const createRandomId = (min, max) => {
   };
 };
 
-export {createRandomId};
+export {createRandomNoRepeatInteger};
