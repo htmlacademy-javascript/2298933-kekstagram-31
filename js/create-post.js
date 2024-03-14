@@ -1,4 +1,4 @@
-import {createRandomNumber, getRandomArrayElement, createRandomId} from './util.js';
+import {createRandomNumber, getRandomArrayElement, createRandomNoRepeatInteger} from './util.js';
 
 //Массив имён
 const USER_NAMES = [
@@ -35,8 +35,8 @@ const DESCRIPTIONS = [
 ];
 
 //Создает обьек коментариев
+const COMMENT_ID = createRandomNoRepeatInteger(1, 30);
 const createrComments = () => {
-  const COMMENT_ID = createRandomId(1, 30);
   const COMMENT = {
     id: COMMENT_ID(),
     avatar: `img/avatar-${createRandomNumber(1, 6)}.svg`,
@@ -47,11 +47,12 @@ const createrComments = () => {
 };
 
 //Создает обьек поста
+const POST_ID = createRandomNoRepeatInteger(1, 25);
+const URL_ID = createRandomNoRepeatInteger(1, 25);
 const createPost = () =>{
-  const POST_ID = createRandomId(1, 25);
   const post = {
     id: POST_ID(),
-    url: `photos/${createRandomNumber(1, 25)}.jpg`,
+    url: `photos/${URL_ID()}.jpg`,
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: createRandomNumber(15, 200),
     comments: Array.from({length: createRandomNumber(0, 30)}, createrComments)
@@ -59,6 +60,6 @@ const createPost = () =>{
   return post;
 };
 
-const POST = Array.from({length: 25}, createPost);
+const POSTS = Array.from({length: 25}, createPost);
 
-export {POST};
+export {POSTS};
