@@ -35,10 +35,10 @@ const DESCRIPTIONS = [
 ];
 
 //Создает обьек коментариев
-const COMMENT_ID = createRandomNoRepeatInteger(1, 30);
+const COMMENT_ID = createRandomNoRepeatInteger(1, 3000);
 const createrComments = () => {
   const COMMENT = {
-    id: COMMENT_ID(),
+    id: COMMENT_ID,
     avatar: `img/avatar-${createRandomNumber(1, 6)}.svg`,
     message: getRandomArrayElement(MESSAGES),
     name: getRandomArrayElement(USER_NAMES)
