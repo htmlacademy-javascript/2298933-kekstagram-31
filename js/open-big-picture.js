@@ -6,7 +6,7 @@ const pictureModalCloseButton = bigPictureModal.querySelector('.big-picture__can
 const bigPicture = bigPictureModal.querySelector('.picture__img, img');
 
 function onPictureClick (evt) {
-  if(evt.target.closest('.picture')){
+  if(evt.target.closest('.picture img')){
     evt.preventDefault();
     bigPictureModal.classList.remove('hidden');
     document.body.classList.add('modal-open');
