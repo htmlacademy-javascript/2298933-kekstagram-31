@@ -6,12 +6,13 @@ const pictureModalCloseButton = bigPictureModal.querySelector('.big-picture__can
 const bigPicture = bigPictureModal.querySelector('.picture__img, img');
 
 function onPictureClick (evt) {
-  if(evt.target.closest('a.picture')){
+  if(evt.target.closest('.picture')){
     evt.preventDefault();
     bigPictureModal.classList.remove('hidden');
     document.body.classList.add('modal-open');
     pictureModalCloseButton.addEventListener('click', onCloseButtonClick);
     document.addEventListener('keydown', onEscKeydown);
+    bigPicture.src = evt.target.src;
   }
 }
 
