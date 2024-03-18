@@ -6,12 +6,8 @@ const createRandomNumber = (min, max) => {
   return Math.floor(result);
 };
 
-export {createRandomNumber};
-
 //Получение случайного элемента массива
 const getRandomArrayElement = (elements) => elements[createRandomNumber(0, elements.length - 1)];
-
-export {getRandomArrayElement};
 
 // Создание уникального ID
 const createRandomNoRepeatInteger = (min, max) => {
@@ -29,4 +25,12 @@ const createRandomNoRepeatInteger = (min, max) => {
   };
 };
 
-export {createRandomNoRepeatInteger};
+const isEscapeKey = function(evt){
+  return evt.key === 'Escape';
+};
+
+const isEnterKey = function(evt){
+  return evt.key === 'Enter';
+};
+
+export {createRandomNoRepeatInteger, createRandomNumber, getRandomArrayElement, isEscapeKey, isEnterKey};
