@@ -20,7 +20,4 @@ function loadMoreComments () {
   }
 }
 
-  loadMoreButton.addEventListener('click', loadMoreComments);
-
-
 export {loadMoreComments};
