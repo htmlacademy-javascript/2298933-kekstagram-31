@@ -8,9 +8,20 @@ const hashtagsInput = uploadImagesForm.querySelector('.text__hashtags');
 const descriptionTextArea = uploadImagesForm.querySelector('.text__description');
 
 
-const regexp = /^#[a-zа-яё0-9]{1,19}$/i;
+uploadImagesForm.addEventListener('submit', (evt)=>{
+  evt.preventDefault();
+  const regexp = /^#[a-zа-яё0-9]{1,19}$/i;
+  const pristine = new Pristine(uploadImagesForm);
+  const isFormValid = pristine.validate();
+  const isInputValid = regexp.test(hashtagsInput.value);
 
-const pristine = new Pristine(uploadImagesForm);
+  if(isFormValid && isInputValid) {
+    console.log('Форма отправлена')
+  } else {
+    console.log('Форма не отправлена')
+  }
+
+});
 
 
 function onImageUploadButton () {
