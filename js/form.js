@@ -8,6 +8,9 @@ const hashtagsInput = uploadImagesForm.querySelector('.text__hashtags');
 const descriptionTextArea = uploadImagesForm.querySelector('.text__description');
 
 
+const regexp = /^#[a-zа-яё0-9]{1,19}$/i;
+
+
 function onImageUploadButton () {
   const reader = new FileReader();
   reader.onload = function (evt) {
