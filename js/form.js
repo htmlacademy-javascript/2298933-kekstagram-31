@@ -10,6 +10,8 @@ const descriptionTextArea = uploadImagesForm.querySelector('.text__description')
 
 const regexp = /^#[a-zа-яё0-9]{1,19}$/i;
 
+const pristine = new Pristine(uploadImagesForm);
+
 
 function onImageUploadButton () {
   const reader = new FileReader();
