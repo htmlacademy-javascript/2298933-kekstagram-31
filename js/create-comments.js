@@ -4,7 +4,10 @@ const loadMoreButton = document.querySelector('.social__comments-loader');
 
 const commentFragment = document.createDocumentFragment();
 
+const commentShown = 5;
+
 function createComments (comments) {
+  document.querySelector('.social__comment-total-count').textContent = comments.length;
   commentsList.innerHTML = '';
 
   comments.forEach(({avatar, message, name}) => {
@@ -20,8 +23,8 @@ function createComments (comments) {
 
   const commentsArray = commentsList.querySelectorAll('.social__comment');
 
-  if(commentsArray.length > 5){
-    document.querySelector('.social__comment-shown-count').textContent = 5;
+  if(commentsArray.length > commentShown){
+    document.querySelector('.social__comment-shown-count').textContent = commentShown;
     loadMoreButton.classList.remove('hidden');
   } else {
     document.querySelector('.social__comment-shown-count').textContent = commentsArray.length;
@@ -29,11 +32,10 @@ function createComments (comments) {
   }
 
   hideComments (commentsArray);
-
 }
 
 function hideComments (commentsArray) {
-  for(let i = 5; commentsArray.length > i; i++){
+  for(let i = commentShown; commentsArray.length > i; i++){
     commentsArray[i].classList.add('hidden');
   }
 }

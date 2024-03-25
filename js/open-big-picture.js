@@ -1,10 +1,12 @@
-import {isEscapeKey} from './util';
-import {picturesBlock} from './create-picture';
+import { isEscapeKey } from './util';
 import { POSTS } from './create-post';
 import { createComments } from './create-comments';
+import { loadMoreComments } from './load-more-comments';
 
+const picturesBlock = document.querySelector('.pictures');
 const bigPictureModal = document.querySelector('.big-picture');
 const pictureModalCloseButton = bigPictureModal.querySelector('.big-picture__cancel');
+const loadMoreButton = document.querySelector('.social__comments-loader');
 
 
 function onPictureClick (evt) {
@@ -20,6 +22,7 @@ function openBigPicture () {
   bigPictureModal.classList.remove('hidden');
   document.body.classList.add('modal-open');
   pictureModalCloseButton.addEventListener('click', onCloseButtonClick);
+  loadMoreButton.addEventListener('click', loadMoreComments);
   document.addEventListener('keydown', onEscKeydown);
 }
 
@@ -34,7 +37,6 @@ function createBigPicture (pictureId) {
   bigPictureModal.querySelector('.social__picture').src = currentPost.avatar;
   bigPictureModal.querySelector('.social__caption').textContent = currentPost.description;
   bigPictureModal.querySelector('.likes-count').textContent = currentPost.likes;
-  bigPictureModal.querySelector('.social__comment-total-count').textContent = currentPost.comments.length;
   createComments(currentPost.comments);
 }
 
@@ -43,6 +45,7 @@ function onCloseButtonClick () {
   bigPictureModal.classList.add('hidden');
   document.body.classList.remove('modal-open');
   pictureModalCloseButton.removeEventListener('click', onCloseButtonClick);
+  loadMoreButton.removeEventListener('click', loadMoreComments);
   document.removeEventListener('keydown', onEscKeydown);
 }
 
@@ -52,8 +55,13 @@ function onEscKeydown (evt) {
     bigPictureModal.classList.add('hidden');
     document.body.classList.remove('modal-open');
     document.removeEventListener('keydown', onEscKeydown);
+    loadMoreButton.removeEventListener('click', loadMoreComments);
     pictureModalCloseButton.removeEventListener('click', onCloseButtonClick);
   }
 }
 
-picturesBlock.addEventListener('click', onPictureClick);
+function addClickPicture() {
+  picturesBlock.addEventListener('click', onPictureClick);
+}
+
+export {addClickPicture};

@@ -1,38 +1,7 @@
-import {createRandomNumber, getRandomArrayElement, createRandomNoRepeatInteger} from './util.js';
+import {USER_NAMES, MESSAGES, DESCRIPTIONS} from './data.js';
+import {createRandomNoRepeatInteger, createRandomNumber, getRandomArrayElement} from './util.js';
 
-//Массив имён
-const USER_NAMES = [
-  'Данька',
-  'Ярослав',
-  'Егор',
-  'Азат',
-  'Балабама',
-  'Алиса',
-  'Оля',
-  'Анжела',
-  'Тамара',
-  'Аня',
-  'Нюра'
-];
-
-//Масив сообщений
-const MESSAGES = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
-];
-
-//Масив описания картинок
-const DESCRIPTIONS = [
-  'Котек',
-  'Котеки',
-  'Дед познает сленг',
-  'Это был момент',
-  'Это мог бы момент, но момент уже был'
-];
+const POSTS_LENGTH = 25;
 
 //Создает обьек коментариев
 const COMMENT_ID = createRandomNoRepeatInteger(1, 3000);
@@ -61,9 +30,9 @@ const createPost = () =>{
   return post;
 };
 
-const POSTS = Array.from({length: 25}, createPost);
+const POSTS = Array.from({length: POSTS_LENGTH}, createPost);
 
-//------------------------------------
+//-----------------------------------------------------------
 const FUN_URL = [
   'fun/thisispower.png',
   'fun/hey-vergil.png',
@@ -229,6 +198,6 @@ POSTS[FUN_RANDOM_ARR_NUMBER()] = HEY_VERGIL;
 POSTS[FUN_RANDOM_ARR_NUMBER()] = NARUTOOOOOO;
 POSTS[FUN_RANDOM_ARR_NUMBER()] = DIO;
 POSTS[FUN_RANDOM_ARR_NUMBER()] = GUL;
-//-----------------------------------
+//---------------------------------------------------------------------------------------
 
 export {POSTS};

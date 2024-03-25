@@ -19,6 +19,9 @@ postsFragments.forEach(({url, description, likes, comments, id}) => {
   postFragment.appendChild(pictureLink);
 });
 
-picturesBlock.appendChild(postFragment);
 
-export{picturesBlock};
+function addedPictures (){
+  picturesBlock.appendChild(postFragment);
+}
+
+export {addedPictures};

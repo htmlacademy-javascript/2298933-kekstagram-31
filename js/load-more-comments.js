@@ -1,12 +1,10 @@
 const loadMoreButton = document.querySelector('.social__comments-loader');
 
-loadMoreButton.addEventListener('click', loadMoreComments);
-
 function loadMoreComments () {
   const currentShownComments = document.querySelector('.social__comment-shown-count');
   const hiddenComments = document.querySelectorAll('.social__comment.hidden');
-  if(hiddenComments.length < 5){
-    currentShownComments.textContent = Number(currentShownComments.textContent) + Number(hiddenComments.length);
+  if(hiddenComments.length <= 5){
+    currentShownComments.textContent = Number(currentShownComments.textContent) + hiddenComments.length;
     for (let i = 0; i < hiddenComments.length; i++){
       hiddenComments[i].classList.remove('hidden');
       loadMoreButton.classList.add('hidden');
@@ -21,3 +19,8 @@ function loadMoreComments () {
     loadMoreButton.removeEventListener('click', loadMoreComments);
   }
 }
+
+  loadMoreButton.addEventListener('click', loadMoreComments);
+
+
+export {loadMoreComments};
