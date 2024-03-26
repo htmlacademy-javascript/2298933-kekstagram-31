@@ -26,9 +26,9 @@ uploadImagesForm.addEventListener('submit', (evt)=>{
   const isValid = pristine.validate();
 
   if(isValid && isFormValid.comment && isFormValid.hashtags){
-    console.log('Можно отправить');
+    // console.log('Можно отправить');
   } else {
-    console.log('Нельзя отправить');
+    // console.log('Нельзя отправить');
   }
 });
 
@@ -192,6 +192,7 @@ function onEscKeydown(evt){
     document.removeEventListener('keydown', onEscKeydown);
     descriptionTextArea.removeEventListener('input', onCommentTextArea);
     descriptionTextArea.value = '';
+    hashtagsInput.value = '';
     newCommentDiv.remove();
     newHashtagsDiv.remove();
   }
@@ -204,6 +205,7 @@ function onCloseModalButton(){
   document.removeEventListener('keydown', onEscKeydown);
   descriptionTextArea.removeEventListener('input', onCommentTextArea);
   descriptionTextArea.value = '';
+  hashtagsInput.value = '';
   newCommentDiv.remove();
   newHashtagsDiv.remove();
 }
