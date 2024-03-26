@@ -193,6 +193,7 @@ function onEscKeydown(evt){
     descriptionTextArea.removeEventListener('input', onCommentTextArea);
     descriptionTextArea.value = '';
     hashtagsInput.value = '';
+    immageUploadButton.value = '';
     newCommentDiv.remove();
     newHashtagsDiv.remove();
   }
@@ -204,6 +205,7 @@ function onCloseModalButton(){
   closeModalButton.removeEventListener('click', onCloseModalButton);
   document.removeEventListener('keydown', onEscKeydown);
   descriptionTextArea.removeEventListener('input', onCommentTextArea);
+  immageUploadButton.value = '';
   descriptionTextArea.value = '';
   hashtagsInput.value = '';
   newCommentDiv.remove();
