@@ -1,4 +1,5 @@
 import { isEscapeKey } from './util';
+import {addEventOnScaleButton} from './edit-image';
 
 const uploadImagesForm = document.querySelector('.img-upload__form');
 const immageUploadOverlay = uploadImagesForm.querySelector('.img-upload__overlay');
@@ -167,6 +168,7 @@ function onImageUploadButton () {
     immageUploadOverlay.querySelector('.img-upload__preview img').src = previewUrl;
     addPreviewsImages(previewUrl);
   };
+  addEventOnScaleButton();
   reader.readAsDataURL(this.files[0]);
   immageUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -186,6 +188,7 @@ function addPreviewsImages(url){
 function onEscKeydown(evt){
   if(isEscapeKey(evt)){
     evt.preventDefault();
+    addEventOnScaleButton();
     immageUploadOverlay.classList.add('hidden');
     document.body.classList.remove('modal-open');
     closeModalButton.removeEventListener('click', onCloseModalButton);
@@ -199,7 +202,8 @@ function onEscKeydown(evt){
   }
 }
 
-function onCloseModalButton(){
+function onCloseModalButton() {
+  addEventOnScaleButton();
   immageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   closeModalButton.removeEventListener('click', onCloseModalButton);
