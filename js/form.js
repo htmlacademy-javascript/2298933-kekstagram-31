@@ -1,5 +1,6 @@
 import { isEscapeKey } from './util';
-import {addEventOnScaleButton} from './edit-image';
+import { addEventOnScaleButton } from './edit-scale-image';
+import { addEffectsEvent } from './edit-effect-image';
 
 const uploadImagesForm = document.querySelector('.img-upload__form');
 const immageUploadOverlay = uploadImagesForm.querySelector('.img-upload__overlay');
@@ -166,8 +167,10 @@ function onImageUploadButton () {
   reader.onload = function (e) {
     const previewUrl = e.target.result;
     immageUploadOverlay.querySelector('.img-upload__preview img').src = previewUrl;
+    immageUploadOverlay.querySelector('.img-upload__preview img').style = '';
     addPreviewsImages(previewUrl);
   };
+  addEffectsEvent();
   addEventOnScaleButton();
   reader.readAsDataURL(this.files[0]);
   immageUploadOverlay.classList.remove('hidden');
@@ -188,6 +191,7 @@ function addPreviewsImages(url){
 function onEscKeydown(evt){
   if(isEscapeKey(evt)){
     evt.preventDefault();
+    addEffectsEvent();
     addEventOnScaleButton();
     immageUploadOverlay.classList.add('hidden');
     document.body.classList.remove('modal-open');
@@ -204,6 +208,7 @@ function onEscKeydown(evt){
 
 function onCloseModalButton() {
   addEventOnScaleButton();
+  addEffectsEvent();
   immageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   closeModalButton.removeEventListener('click', onCloseModalButton);

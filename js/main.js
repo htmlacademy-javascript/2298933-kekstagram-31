@@ -7,3 +7,4 @@ addedPictures();
 addDeathGram();
 addClickPicture();
 onUploadForm();
+

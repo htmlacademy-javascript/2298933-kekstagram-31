@@ -26,7 +26,7 @@ function onReducSizeButton (){
     reducSizeButton.disabled = false;
     increaseSizeButton.disabled = false;
     currentValue = Number(currentValue) - SCALE_STEP;
-    previewImage.style = `transform: scale(${Number(currentValue) / 100})`;
+    previewImage.style.transform = `scale(${(Number(currentValue) / 100)})`;
     currentValue += '%';
     imageScaleInputValue.value = currentValue;
   }
@@ -41,7 +41,7 @@ function onIncreaseSizeButton (){
     reducSizeButton.disabled = false;
     increaseSizeButton.disabled = false;
     currentValue = Number(currentValue) + SCALE_STEP;
-    previewImage.style = `transform: scale(${Number(currentValue) / 100})`;
+    previewImage.style.transform = `scale(${(Number(currentValue) / 100)})`;
     currentValue += '%';
     imageScaleInputValue.value = currentValue;
   }
