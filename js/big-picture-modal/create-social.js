@@ -3,7 +3,6 @@ function createSocialHeader(data) {
   const dataElement = getDataElement(data, pictureId);
 
   createSocialDescription(dataElement);
-
 }
 
 function createSocialDescription(dataElement) {
