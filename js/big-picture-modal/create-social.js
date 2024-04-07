@@ -1,13 +1,16 @@
+import { createCommentsList } from './create-comments.js';
+
 function createSocialHeader(data) {
   const pictureId = getBigPictureDatasetId();
   const dataElement = getDataElement(data, pictureId);
 
   createSocialDescription(dataElement);
+  createCommentsList(dataElement);
 }
 
 function createSocialDescription(dataElement) {
   const socialDescription = document.querySelector('.social__caption');
-  const socialLikes = document.querySelector('.social__likes');
+  const socialLikes = document.querySelector('.likes-count');
 
   socialDescription.textContent = dataElement.description;
   socialLikes.textContent = dataElement.likes;

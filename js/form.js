@@ -1,7 +1,6 @@
-import { isEscapeKey } from '../util.js';
+import { isEscapeKey } from './util';
 import { addEventOnScaleButton } from './edit-scale-image';
 import { addEffectsEvent } from './edit-effect-image';
-import { sendData } from '../api.js';
 
 const uploadImagesForm = document.querySelector('.img-upload__form');
 const immageUploadOverlay = uploadImagesForm.querySelector('.img-upload__overlay');
@@ -30,8 +29,6 @@ uploadImagesForm.addEventListener('submit', (evt)=>{
 
   if(isValid && isFormValid.comment && isFormValid.hashtags){
     const formData = new FormData(evt.target);
-
-    // sendData(formData);
 
     fetch(
       'https://31.javascript.htmlacademy.pro/kekstagram',

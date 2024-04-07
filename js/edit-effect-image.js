@@ -1,3 +1,4 @@
+
 const effectsPreview = document.querySelectorAll('.effects__preview');
 const effectSlider = document.querySelector('.effect-level__slider');
 const effectsInputList = document.querySelector('.effects__list');
