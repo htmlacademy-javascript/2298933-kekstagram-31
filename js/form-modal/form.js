@@ -1,6 +1,7 @@
-import { isEscapeKey } from './util';
+import { isEscapeKey } from '../util.js';
 import { addEventOnScaleButton } from './edit-scale-image';
 import { addEffectsEvent } from './edit-effect-image';
+import { sendData } from '../api.js';
 
 const uploadImagesForm = document.querySelector('.img-upload__form');
 const immageUploadOverlay = uploadImagesForm.querySelector('.img-upload__overlay');
@@ -18,7 +19,7 @@ const pristine = new Pristine(uploadImagesForm);
 
 
 const isFormValid = {
-  comment: false,
+  comment: true,
   hashtags: false
 };
 
@@ -28,12 +29,59 @@ uploadImagesForm.addEventListener('submit', (evt)=>{
   const isValid = pristine.validate();
 
   if(isValid && isFormValid.comment && isFormValid.hashtags){
-    // console.log('Можно отправить');
+    const formData = new FormData(evt.target);
+
+    // sendData(formData);
+
+    fetch(
+      'https://31.javascript.htmlacademy.pro/kekstagram',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    );
+    onCloseModalButton();
+    onFormSuccess();
   } else {
-    // console.log('Нельзя отправить');
+    onFormError();
   }
 });
 
+function onFormSuccess() {
+  const successTemplate = document.querySelector('#success')
+    .content
+    .querySelector('.success');
+
+  const modalSucces = document.createDocumentFragment();
+  const success = successTemplate.cloneNode(true);
+  modalSucces.appendChild(success);
+  document.body.appendChild(modalSucces);
+  document.body.classList.add('modal-open');
+  success.querySelector('.success__button').addEventListener('click', onSuccessButton);
+}
+
+function onSuccessButton() {
+  document.querySelector('.success').querySelector('.success__button').removeEventListener('click', onSuccessButton);
+  document.querySelector('.success').remove();
+}
+
+function onFormError() {
+  const errorTemplate = document.querySelector('#error')
+    .content
+    .querySelector('.error');
+
+  const modalError = document.createDocumentFragment();
+  const error = errorTemplate.cloneNode(true);
+  modalError.appendChild(error);
+  document.body.appendChild(modalError);
+  document.body.classList.add('modal-open');
+  error.querySelector('.error__button').addEventListener('click', onErrorButton);
+}
+
+function onErrorButton() {
+  document.querySelector('.error').querySelector('.error__button').removeEventListener('click', onErrorButton);
+  document.querySelector('.error').remove();
+}
 
 const newCommentDiv = document.createElement('div');
 const newHashtagsDiv = document.createElement('div');
@@ -42,7 +90,7 @@ function onCommentTextArea () {
   newCommentDiv.classList.add('img-upload__field-wrapper--error');
   newCommentDiv.classList.add('pristine-error');
 
-  let errorComment;
+  let errorComment = 0;
 
 
   if(descriptionTextArea.value.length >= MAX_COMMENT_LENGTH){
@@ -62,25 +110,24 @@ function onCommentTextArea () {
 
   switch(errorComment){
     case 0:
+      isFormValid.comment = true;
       submitButton.disabled = false;
       newCommentDiv.remove();
       break;
     case 1:
+      descriptionTextArea.after(newCommentDiv);
+      isFormValid.comment = false;
       submitButton.disabled = true;
       newCommentDiv.textContent = `Не более ${MAX_COMMENT_LENGTH} символов`;
       break;
     case 2:
+      descriptionTextArea.after(newCommentDiv);
+      isFormValid.comment = false;
       newCommentDiv.textContent = 'Пожалуйста введите хештеги';
       submitButton.disabled = true;
       break;
   }
 
-  if(errorComment === 0){
-    newCommentDiv.remove();
-    isFormValid.comment = true;
-  } else {
-    descriptionTextArea.after(newCommentDiv);
-  }
 }
 
 function onHashtagInput () {
@@ -140,24 +187,28 @@ function onHashtagInput () {
 
   switch(errorHashtags.errorMessage){
     case 0:
+      isFormValid.hashtags = true;
       submitButton.disabled = false;
       newHashtagsDiv.remove();
       break;
     case 1:
+      hashtagsInput.after(newHashtagsDiv);
+      submitButton.disabled = true;
+      isFormValid.hashtags = false;
       newHashtagsDiv.textContent = 'Не правильно записан хештег';
       break;
     case 2:
+      hashtagsInput.after(newHashtagsDiv);
+      submitButton.disabled = true;
+      isFormValid.hashtags = false;
       newHashtagsDiv.textContent = 'Хештеги повторяются';
       break;
     case 3:
+      hashtagsInput.after(newHashtagsDiv);
+      submitButton.disabled = true;
+      isFormValid.hashtags = false;
       newHashtagsDiv.textContent = `Должно быть не более ${MAX_HASHTAGS} хештегов`;
       break;
-  }
-
-  if(errorHashtags.errorMessage !== 0){
-    hashtagsInput.after(newHashtagsDiv);
-    isFormValid.hashtags = false;
-    submitButton.disabled = true;
   }
 
 }
@@ -170,6 +221,7 @@ function onImageUploadButton () {
     immageUploadOverlay.querySelector('.img-upload__preview img').style = '';
     addPreviewsImages(previewUrl);
   };
+  submitButton.disabled = 'true';
   addEffectsEvent();
   addEventOnScaleButton();
   reader.readAsDataURL(this.files[0]);
