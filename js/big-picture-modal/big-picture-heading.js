@@ -1,6 +1,7 @@
 import { createCommentsList } from './create-comments.js';
+import { getDataElement } from '../util.js';
 
-function createSocialHeader(data) {
+function createBigPictureHeading(data) {
   const pictureId = getBigPictureDatasetId();
   const dataElement = getDataElement(data, pictureId);
 
@@ -22,14 +23,5 @@ function getBigPictureDatasetId() {
   return pictureDatasetId;
 }
 
-function getDataElement(dataArray, datasetId) {
-  let dataElement = '';
-  for(let i = 0; dataArray.length > i; i++) {
-    if(dataArray[i].id === datasetId){
-      dataElement = dataArray[i];
-    }
-  }
-  return dataElement;
-}
 
-export {createSocialHeader};
+export {createBigPictureHeading};

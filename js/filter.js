@@ -7,7 +7,6 @@ function addFilterEvent() {
   filterForm.addEventListener('click', onFilterButton);
 }
 
-
 function onFilterButton(evt) {
   const picturePosts = document.querySelectorAll('.picture');
   const currentButton = evt.target.closest('.img-filters__button');

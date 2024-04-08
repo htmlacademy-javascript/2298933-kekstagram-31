@@ -1,50 +1,45 @@
 const reducSizeButton = document.querySelector('.scale__control--smaller');
 const increaseSizeButton = document.querySelector('.scale__control--bigger');
-const imageScaleInputValue = document.querySelector('.scale__control--value');
+const imageScaleInputValue = document.querySelector('input.scale__control--value');
 const previewImage = document.querySelector('.img-upload__preview img');
 
-const SCALE_STEP = 25;
-const SCALE_MIN = 25;
-const SCALE_MAX = 100;
 
+function addEventOnScaleButton() {
+  reducSizeButton.addEventListener('click', onReducSizeButton);
+  increaseSizeButton.addEventListener('click', onIncreaseSizeButton);
 
-function addEventOnScaleButton () {
-  if(document.querySelector('.img-upload__overlay').classList.contains('hidden') === true){
-    reducSizeButton.addEventListener('click', onReducSizeButton);
-    increaseSizeButton.addEventListener('click', onIncreaseSizeButton);
+}
+
+function removeEventOnScaleButton() {
+  reducSizeButton.removeEventListener('click', onReducSizeButton);
+  increaseSizeButton.removeEventListener('click', onIncreaseSizeButton);
+}
+
+function onReducSizeButton() {
+  if (imageScaleInputValue.value === '25%') {
+    imageScaleInputValue.setAttribute('value', '25%');
+    imageScaleInputValue.value = '25%';
+    previewImage.style.transform = `scale(${imageScaleInputValue.value})`;
   } else {
-    reducSizeButton.removeEventListener('click', onReducSizeButton);
-    increaseSizeButton.removeEventListener('click', onIncreaseSizeButton);
+    const currenValue = parseInt(imageScaleInputValue.value, 10) - 25;
+    imageScaleInputValue.setAttribute('value', `${currenValue}%`);
+    imageScaleInputValue.value = `${currenValue}%`;
+    previewImage.style.transform = `scale(${imageScaleInputValue.value})`;
   }
 }
 
-function onReducSizeButton (){
-  let currentValue = imageScaleInputValue.value.slice(0, -1);
-  if(Number(currentValue) === SCALE_MIN){
-    reducSizeButton.disabled = true;
+
+function onIncreaseSizeButton() {
+  if (imageScaleInputValue.value === '100%') {
+    imageScaleInputValue.setAttribute('value', '100%');
+    imageScaleInputValue.value = '100%';
+    previewImage.style.transform = `scale(${imageScaleInputValue.value})`;
   } else {
-    reducSizeButton.disabled = false;
-    increaseSizeButton.disabled = false;
-    currentValue = Number(currentValue) - SCALE_STEP;
-    previewImage.style.transform = `scale(${(Number(currentValue) / 100)})`;
-    currentValue += '%';
-    imageScaleInputValue.value = currentValue;
+    const currenValue = parseInt(imageScaleInputValue.value, 10) + 25;
+    imageScaleInputValue.setAttribute('value', `${currenValue}%`);
+    imageScaleInputValue.value = `${currenValue}%`;
+    previewImage.style.transform = `scale(${imageScaleInputValue.value})`;
   }
 }
 
-
-function onIncreaseSizeButton (){
-  let currentValue = imageScaleInputValue.value.slice(0, -1);
-  if(Number(currentValue) > SCALE_MAX){
-    increaseSizeButton.disabled = true;
-  } else if (Number(currentValue) < SCALE_MAX) {
-    reducSizeButton.disabled = false;
-    increaseSizeButton.disabled = false;
-    currentValue = Number(currentValue) + SCALE_STEP;
-    previewImage.style.transform = `scale(${(Number(currentValue) / 100)})`;
-    currentValue += '%';
-    imageScaleInputValue.value = currentValue;
-  }
-}
-
-export {addEventOnScaleButton};
+export {addEventOnScaleButton, removeEventOnScaleButton};
