@@ -24,7 +24,7 @@ noUiSlider.create(slider, {
   connect: 'lower',
 });
 
-const applyingEffects = (target) => {
+function applyingEffects(target) {
   switch (target) {
     case effectNone:
       sliderContainer.classList.add('hidden');
@@ -127,12 +127,25 @@ const applyingEffects = (target) => {
       });
       break;
   }
-};
+}
 
-listEffects.forEach((effectsItem) => {
-  effectsItem.addEventListener('click', (evt) => {
-    if (evt.target.tagName === 'INPUT') {
-      applyingEffects(evt.target);
-    }
+function onEffectButton(evt) {
+  if (evt.target.tagName === 'INPUT') {
+    applyingEffects(evt.target);
+  }
+}
+
+function addOnEffectButtonEvent() {
+  listEffects.forEach((effectsItem) => {
+    effectsItem.addEventListener('click', onEffectButton);
   });
-});
+}
+
+
+function removeOnEffectButtonEvent() {
+  listEffects.forEach((effectsItem) => {
+    effectsItem.removeEventListener('click', onEffectButton);
+  });
+}
+
+export {removeOnEffectButtonEvent, addOnEffectButtonEvent};

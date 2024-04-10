@@ -3,6 +3,7 @@ import { pristine } from './pristine-validator.js';
 import { isEscapeKey } from './util.js';
 import { addEventOnScaleButton, removeEventOnScaleButton } from './edit-scale-image.js';
 import { openSuccessSendDataMessage, openErrorSendDataMessage } from './messages.js';
+import { removeOnEffectButtonEvent, addOnEffectButtonEvent } from './edit-effect-image.js';
 
 const usersImagesUploadForm = document.querySelector('.img-upload__form');
 const imageUploadBlock = usersImagesUploadForm.querySelector('.img-upload__overlay');
@@ -40,13 +41,13 @@ function onSubmitForm(evt) {
         pristine.reset(hashtagsInput);
         removeEventOnScaleButton();
         openSuccessSendDataMessage();
+        removeOnEffectButtonEvent();
         formReset();
       })
       .catch(() => {
         openErrorSendDataMessage();
       })
       .finally(() => {
-
         unlockSubmitButton();
       });
   }
@@ -60,6 +61,7 @@ function onImageUploadButton() {
   document.addEventListener('keydown', onEscKeydown);
   usersImagesUploadForm.addEventListener('submit', onSubmitForm);
   closeFormButton.addEventListener('click', onFromCloseButton);
+  addOnEffectButtonEvent();
 }
 
 function onFromCloseButton() {
@@ -70,6 +72,7 @@ function onFromCloseButton() {
   document.removeEventListener('keydown', onEscKeydown);
   usersImagesUploadForm.removeEventListener('submit', onSubmitForm);
   closeFormButton.removeEventListener('click', onFromCloseButton);
+  removeOnEffectButtonEvent();
   imageUploadButton.value = '';
   pristine.reset(hashtagsInput);
 }
@@ -101,6 +104,7 @@ function onEscKeydown(evt) {
     document.removeEventListener('keydown', onEscKeydown);
     usersImagesUploadForm.removeEventListener('submit', onSubmitForm);
     closeFormButton.removeEventListener('click', onFromCloseButton);
+    removeOnEffectButtonEvent();
     imageUploadButton.value = '';
   }
 }
