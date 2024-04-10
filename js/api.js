@@ -1,4 +1,4 @@
-import { getDataErrorMessage } from './messages.js';
+import { getDataErrorMessage, openErrorSendDataMessage } from './messages.js';
 
 const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
 
@@ -11,17 +11,19 @@ const Method = {
   POST: 'POST',
 };
 
-const error = {
-  [Method.GET]: getDataErrorMessage,
-  [Method.POST]: 'Не удалось отправить данные формы'
-};
-
 
 const load = async(route, method = Method.GET, body = null) => {
   const response = await fetch(`${BASE_URL}${route}`, {method, body});
-  return response.ok ? await response.json() : Promise.reject(error[method]());
+  return response.ok ? await response.json() : getError(method);
 };
 
+function getError(method) {
+  if(method === Method.GET) {
+    return Promise.reject(getDataErrorMessage());
+  } else if(method === Method.POST) {
+    return Promise.reject(openErrorSendDataMessage());
+  }
+}
 
 const getData = async () => await load(Route.GET_DATA);
 

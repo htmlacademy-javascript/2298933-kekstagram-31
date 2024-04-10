@@ -12,5 +12,14 @@ function getDataElement(dataArray, datasetId) {
   return dataElement;
 }
 
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
 
-export {isEscapeKey, getDataElement};
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+
+export {isEscapeKey, getDataElement, debounce};

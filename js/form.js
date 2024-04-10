@@ -1,6 +1,6 @@
+import { sendData } from './api.js';
 import { pristine } from './pristine-validator.js';
 import { isEscapeKey } from './util.js';
-import { sendData } from './api.js';
 import { addEventOnScaleButton, removeEventOnScaleButton } from './edit-scale-image.js';
 import { openSuccessSendDataMessage, openErrorSendDataMessage } from './messages.js';
 
@@ -19,10 +19,6 @@ const closeFormButton = usersImagesUploadForm.querySelector('.img-upload__cancel
 
 const FILE_TYPES = ['.jpg', '.jpeg', '.png', '.gif', '.jfif'];
 
-function addEventOnSubmitForm() {
-  usersImagesUploadForm.addEventListener('change', onImageUploadButton);
-}
-
 
 function onSubmitForm(evt) {
   evt.preventDefault();
@@ -31,19 +27,27 @@ function onSubmitForm(evt) {
   const isDescriptionInputValid = pristine.validate(descriptionInput);
 
   if(isHashtagsInputValid && isDescriptionInputValid) {
-    submitButton.disabled = true;
+    blockSubmitButton();
     const formData = new FormData(evt.target);
     sendData(formData)
       .then(() => {
+        imageUploadBlock.classList.add('hidden');
+        document.body.classList.remove('modal-open');
+        document.removeEventListener('keydown', onEscKeydown);
+        usersImagesUploadForm.removeEventListener('submit', onSubmitForm);
+        closeFormButton.removeEventListener('click', onFromCloseButton);
+        imageUploadButton.value = '';
+        pristine.reset(hashtagsInput);
+        removeEventOnScaleButton();
         openSuccessSendDataMessage();
-        onFromCloseButton();
         formReset();
       })
       .catch(() => {
         openErrorSendDataMessage();
       })
       .finally(() => {
-        submitButton.disabled = false;
+
+        unlockSubmitButton();
       });
   }
 }
@@ -85,7 +89,12 @@ function loadUsersImage() {
 
 function onEscKeydown(evt) {
   if(isEscapeKey(evt)){
+    if (evt.target === hashtagsInput || evt.target === descriptionInput) {
+      return;
+    }
     evt.preventDefault();
+    formReset();
+    pristine.reset(hashtagsInput);
     removeEventOnScaleButton();
     imageUploadBlock.classList.add('hidden');
     document.body.classList.remove('modal-open');
@@ -114,4 +123,20 @@ function resetEffectButton(effectsInput, effectImage) {
   }
 }
 
-export {addEventOnSubmitForm};
+function blockSubmitButton() {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправляю данные';
+}
+
+function unlockSubmitButton() {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+}
+
+function addEventOnSubmitForm() {
+  usersImagesUploadForm.addEventListener('change', onImageUploadButton);
+}
+
+addEventOnSubmitForm();
+
+export {addEventOnSubmitForm, onEscKeydown};
