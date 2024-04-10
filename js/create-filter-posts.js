@@ -14,5 +14,4 @@ function setPosts(dataArray) {
   createPostFragments(pictures);
 }
 
-
 export { setPosts };
