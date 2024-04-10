@@ -1,19 +1,9 @@
-import { getData } from './api.js';
-import { createPostFragment } from './create-posts.js';
-import { openGetDataError } from './errors-function/get-data-error.js';
-import { openBigPictureEvent } from './big-picture-modal/open-big-picture.js';
-import { onUploadForm } from './form-modal/form.js';
+import './form.js';
+import { DATA } from './data.js';
+import { addBigPictureEvent } from './big-picture-modal/big-picture.js';
+import { filterConfig } from './filter.js';
+import './edit-effect-image.js';
+import './edit-scale-image.js';
 
-
-getData()
-  .then((posts) => {
-    createPostFragment(posts);
-    openBigPictureEvent();
-  })
-  .catch(
-    () => {
-      openGetDataError();
-    }
-  );
-
-onUploadForm();
+addBigPictureEvent();
+filterConfig(DATA);

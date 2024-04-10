@@ -1,13 +1,17 @@
-function createSocialHeader(data) {
+import { createCommentsList } from './create-comments.js';
+import { getDataElement } from '../util.js';
+
+function createBigPictureHeading(data) {
   const pictureId = getBigPictureDatasetId();
   const dataElement = getDataElement(data, pictureId);
 
   createSocialDescription(dataElement);
+  createCommentsList(dataElement);
 }
 
 function createSocialDescription(dataElement) {
   const socialDescription = document.querySelector('.social__caption');
-  const socialLikes = document.querySelector('.social__likes');
+  const socialLikes = document.querySelector('.likes-count');
 
   socialDescription.textContent = dataElement.description;
   socialLikes.textContent = dataElement.likes;
@@ -19,14 +23,5 @@ function getBigPictureDatasetId() {
   return pictureDatasetId;
 }
 
-function getDataElement(dataArray, datasetId) {
-  let dataElement = '';
-  for(let i = 0; dataArray.length > i; i++) {
-    if(dataArray[i].id === datasetId){
-      dataElement = dataArray[i];
-    }
-  }
-  return dataElement;
-}
 
-export {createSocialHeader};
+export {createBigPictureHeading};

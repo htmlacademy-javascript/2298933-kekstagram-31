@@ -1,6 +1,7 @@
-import { openGetDataError } from './errors-function/get-data-error';
+import { getDataErrorMessage, openErrorSendDataMessage } from './messages.js';
 
 const BASE_URL = 'https://31.javascript.htmlacademy.pro/kekstagram';
+
 const Route = {
   GET_DATA: '/data',
   SEND_DATA: '/',
@@ -10,20 +11,22 @@ const Method = {
   POST: 'POST',
 };
 
-const load = (route, method = Method.GET, body = null) =>
-  fetch(`${BASE_URL}${route}`, {method, body})
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error();
-      }
-      return response.json();
-    })
-    .catch(() => {
-      throw new Error(openGetDataError());
-    });
 
-const getData = () => load(Route.GET_DATA);
+const load = async(route, method = Method.GET, body = null) => {
+  const response = await fetch(`${BASE_URL}${route}`, {method, body});
+  return response.ok ? await response.json() : getError(method);
+};
 
-const sendData = (body) => load(Route.SEND_DATA, Method.POST, body);
+function getError(method) {
+  if(method === Method.GET) {
+    return Promise.reject(getDataErrorMessage());
+  } else if(method === Method.POST) {
+    return Promise.reject(openErrorSendDataMessage());
+  }
+}
+
+const getData = async () => await load(Route.GET_DATA);
+
+const sendData = async (body) => await load(Route.SEND_DATA, Method.POST, body);
 
 export {getData, sendData};

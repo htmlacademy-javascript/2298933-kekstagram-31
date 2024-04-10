@@ -2,12 +2,24 @@ const isEscapeKey = function(evt){
   return evt.key === 'Escape';
 };
 
-function getDataElement(datas, datasetId) {
-  for(let i = 0; datas.length > i; i++){
-    if(datas[i].id === datasetId){
-      return datas[i];
+function getDataElement(dataArray, datasetId) {
+  let dataElement = '';
+  for(let i = 0; dataArray.length > i; i++) {
+    if(dataArray[i].id === datasetId){
+      dataElement = dataArray[i];
     }
   }
+  return dataElement;
 }
 
-export {isEscapeKey, getDataElement};
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+
+export {isEscapeKey, getDataElement, debounce};
