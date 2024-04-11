@@ -17,8 +17,9 @@ const modalFragment = document.createDocumentFragment();
 const modalError = templateErrorSendData.cloneNode(true);
 const modalSuccess = templateSucceessSendData.cloneNode(true);
 
+const ERROR_MODAL_TIME = 5000;
+
 function getDataErrorMessage() {
-  const errorModalTime = 5000;
   const errorModal = document.createDocumentFragment();
   const errorData = templateDataError.cloneNode(true);
   errorModal.appendChild(errorData);
@@ -26,7 +27,7 @@ function getDataErrorMessage() {
 
   setTimeout(() => {
     errorData.remove();
-  }, errorModalTime);
+  }, ERROR_MODAL_TIME);
 }
 
 

@@ -1,5 +1,5 @@
 import { getData } from './api.js';
-import { openErrorSendDataMessage } from './messages.js';
+import { getDataErrorMessage } from './messages.js';
 import { createPostFragments } from './create-posts.js';
 
 const createData = async () => {
@@ -8,7 +8,7 @@ const createData = async () => {
     createPostFragments(dataFiles);
     return dataFiles;
   } catch {
-    openErrorSendDataMessage();
+    getDataErrorMessage();
   }
 };
 

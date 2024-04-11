@@ -20,6 +20,7 @@ const closeFormButton = usersImagesUploadForm.querySelector('.img-upload__cancel
 
 const FILE_TYPES = ['.jpg', '.jpeg', '.png', '.gif', '.jfif'];
 
+const DEFAULT_IMAGE_SCALE = 100;
 
 function onSubmitForm(evt) {
   evt.preventDefault();
@@ -115,7 +116,7 @@ function formReset() {
   sliderRange.classList.add('hidden');
   usersImagePreviews.style.filter = 'grayscale(0)';
   usersImagePreviews.style.transform = 'scale(1)';
-  scaleImageValue.setAttribute('value', '100%');
+  scaleImageValue.setAttribute('value', `${DEFAULT_IMAGE_SCALE}%`);
 }
 
 function resetEffectButton(effectsInput, effectImage) {

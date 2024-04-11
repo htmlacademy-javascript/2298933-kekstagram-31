@@ -3,7 +3,7 @@ const commentElementTemplate = commentsList.querySelector('.social__comment');
 
 const commentFragment = document.createDocumentFragment();
 
-const maxCommentShownCount = 5;
+const MAX_COMMENT_SHOWN_COUNT = 5;
 
 function createCommentsList(dataElement) {
   const commentsArray = dataElement.comments;
@@ -28,11 +28,11 @@ function addComments(commentsArray) {
 function hideComments() {
   const commentsListElements = document.querySelectorAll('.social__comment');
   const commentsShowCount = document.querySelector('.social__comment-shown-count');
-  if(commentsListElements.length <= maxCommentShownCount) {
+  if(commentsListElements.length <= MAX_COMMENT_SHOWN_COUNT) {
     commentsShowCount.textContent = commentsListElements.length;
   } else {
-    commentsShowCount.textContent = maxCommentShownCount;
-    for(let i = 5; commentsListElements.length > i; i++) {
+    commentsShowCount.textContent = MAX_COMMENT_SHOWN_COUNT;
+    for(let i = MAX_COMMENT_SHOWN_COUNT; commentsListElements.length > i; i++) {
       commentsListElements[i].classList.add('hidden');
     }
   }

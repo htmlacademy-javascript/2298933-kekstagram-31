@@ -63,7 +63,7 @@ function createErrorMessage(inputValue) {
 
 function checkHashtagsLength(hashtags) {
   let result = false;
-  if(hashtags.length === 0 || MAX_HASHTAGS >= hashtags.length) {
+  if(MAX_HASHTAGS >= hashtags.length) {
     result = true;
   }
   return result;
@@ -72,7 +72,7 @@ function checkHashtagsLength(hashtags) {
 function checkRepeatHeshtags(heshtags) {
   let result = true;
   const duplicates = heshtags.filter((e, i, a) => a.indexOf(e) !== i);
-  if(duplicates.length !== 0){
+  if(duplicates.length) {
     result = false;
   }
   return result;
@@ -86,6 +86,7 @@ function checkValidateByRegular(hashtags) {
   for(let i = 0; hashtags.length > i; i++){
     if(!regexp.test(hashtags[i])){
       result = false;
+      return result;
     }
   }
   return result;
@@ -97,6 +98,7 @@ function getValidateResult(validateObject) {
   for(let i = 0; keysValue.length > i; i++) {
     if(keysValue[i] === false) {
       result = false;
+      return result;
     }
   }
   return result;
@@ -114,6 +116,7 @@ function getErrorMessage(validateObject) {
   for (let i = 0; keysValue.length > i; i++){
     if(keysValue[i] === false){
       result = ERROR_HASHTAGS_MESSAGES[i];
+      return result;
     }
   }
   return result;
