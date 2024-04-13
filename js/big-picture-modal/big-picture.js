@@ -1,6 +1,6 @@
 import { DATA } from '../data.js';
 import { createBigPictureHeading } from './big-picture-heading.js';
-import { addLoadMoreCommentsEvent, loadMoreComments } from './load-more-comments.js';
+import { addLoadMoreCommentsEvent, onLoadMoreCommentsButton } from './load-more-comments.js';
 import { isEscapeKey } from '../util.js';
 
 
@@ -20,9 +20,10 @@ function onPictureClick(evt) {
   if(currentPicture) {
     evt.preventDefault();
     let currentImage;
-    for(let i = 0; DATA.length > i; i++){
-      if(DATA[i].id === Number(currentPicture.dataset.pictureId)){
+    for(let i = 0; DATA.length > i; i++) {
+      if(DATA[i].id === Number(currentPicture.dataset.pictureId)) {
         currentImage = DATA[i];
+        break;
       }
     }
     bigPictureBlock.classList.remove('hidden');
@@ -43,7 +44,7 @@ function onCloseButton() {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onEscKeydown);
   closeBigPictureModal.removeEventListener('click', onCloseButton);
-  loadMoreCommentsButton.removeEventListener('click', loadMoreComments);
+  loadMoreCommentsButton.removeEventListener('click', onLoadMoreCommentsButton);
 }
 
 function onEscKeydown(evt) {
@@ -53,7 +54,7 @@ function onEscKeydown(evt) {
     document.body.classList.remove('modal-open');
     document.removeEventListener('keydown', onEscKeydown);
     closeBigPictureModal.removeEventListener('click', onCloseButton);
-    loadMoreCommentsButton.removeEventListener('click', loadMoreComments);
+    loadMoreCommentsButton.removeEventListener('click', onLoadMoreCommentsButton);
   }
 }
 
