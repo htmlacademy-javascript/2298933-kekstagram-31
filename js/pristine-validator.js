@@ -62,35 +62,29 @@ function createErrorMessage(inputValue) {
 }
 
 function checkHashtagsLength(hashtags) {
-  let result = false;
-  if(MAX_HASHTAGS >= hashtags.length) {
-    result = true;
-  }
-  return result;
+  return MAX_HASHTAGS >= hashtags.length;
 }
 
-function checkRepeatHeshtags(heshtags) {
-  let result = true;
-  const duplicates = heshtags.filter((e, i, a) => a.indexOf(e) !== i);
-  if(duplicates.length) {
-    result = false;
-  }
-  return result;
+function checkRepeatHeshtags(hashtags) {
+  const duplicates = hashtags.filter((e, i, a) => a.indexOf(e) !== i);
+  return !duplicates.length;
 }
 
 function checkValidateByRegular(hashtags) {
   let result = true;
-  if(hashtags.length === 0){
+  if(hashtags.length === 0) {
     return result;
   }
-  for(let i = 0; hashtags.length > i; i++){
-    if(!REGEXP.test(hashtags[i])){
-      result = false;
-      return result;
+  result = hashtags.every((hashtag) => {
+    if(!REGEXP.test(hashtag)) {
+      return false;
+    } else {
+      return true;
     }
-  }
+  });
   return result;
 }
+
 
 function getValidateResult(validateObject) {
   let result = true;
@@ -105,8 +99,8 @@ function getValidateResult(validateObject) {
 }
 
 function getHashtagsArray(hashtags) {
-  hashtags = (hashtags.toLowerCase().trim().split(' '));
-  const result = hashtags.filter((hashtag) => hashtag !== '');
+  const hashtagsArray = hashtags.toLowerCase().trim().split(' ');
+  const result = hashtagsArray.filter((hashtag) => hashtag !== '');
   return result;
 }
 
