@@ -20,9 +20,10 @@ function onPictureClick(evt) {
   if(currentPicture) {
     evt.preventDefault();
     let currentImage;
-    for(let i = 0; DATA.length > i; i++){
-      if(DATA[i].id === Number(currentPicture.dataset.pictureId)){
+    for(let i = 0; DATA.length > i; i++) {
+      if(DATA[i].id === Number(currentPicture.dataset.pictureId)) {
         currentImage = DATA[i];
+        break;
       }
     }
     bigPictureBlock.classList.remove('hidden');

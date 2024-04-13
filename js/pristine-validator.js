@@ -12,7 +12,7 @@ const ERROR_HASHTAGS_MESSAGES = [
   'Хештеги не должны повторяться',
 ];
 
-const regexp = /^#[a-zа-яё0-9]{1,19}$/i;
+const REGEXP = /^#[a-zа-яё0-9]{1,19}$/i;
 
 
 const pristine = new Pristine(imageUploadForm, {
@@ -84,7 +84,7 @@ function checkValidateByRegular(hashtags) {
     return result;
   }
   for(let i = 0; hashtags.length > i; i++){
-    if(!regexp.test(hashtags[i])){
+    if(!REGEXP.test(hashtags[i])){
       result = false;
       return result;
     }

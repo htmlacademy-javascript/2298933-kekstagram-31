@@ -6,11 +6,11 @@ const Route = {
   GET_DATA: '/data',
   SEND_DATA: '/',
 };
+
 const Method = {
   GET: 'GET',
   POST: 'POST',
 };
-
 
 const load = async(route, method = Method.GET, body = null) => {
   const response = await fetch(`${BASE_URL}${route}`, {method, body});

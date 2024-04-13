@@ -7,6 +7,7 @@ function getDataElement(dataArray, datasetId) {
   for(let i = 0; dataArray.length > i; i++) {
     if(dataArray[i].id === datasetId){
       dataElement = dataArray[i];
+      break;
     }
   }
   return dataElement;
